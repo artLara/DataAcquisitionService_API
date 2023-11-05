@@ -1,0 +1,9 @@
+python 3.8 o superior
+node 20.9.0
+pip3 intall virtualvenv
+python3 -m venv venv
+pip3 intall django
+django-admin startproject dataAcquisition_api .
+python3 manage.py startapp dataAcquisition
+pip3 install djangorestframework
+pip3 install django-cors-headers
