@@ -1,7 +1,7 @@
 # import cv2
 import mediapipe as mp
 import numpy as np
-from Hand import Hand
+from .Hand import Hand
 class HandsDetector():
     def __init__(self, confidenseMP = 0.5, offsetBoundingBox = 50):
         self.__offsetBoundingBox = offsetBoundingBox

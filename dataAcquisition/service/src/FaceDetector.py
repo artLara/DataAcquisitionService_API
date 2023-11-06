@@ -14,7 +14,7 @@ class FaceDetector():
         
         # dirname = os.path.dirname(os.path.abspath(inspect.stack()[0][1]))
         # filename = os.path.join(dirname, 'relative/path/to/file/you/want')
-        base_options = python.BaseOptions(model_asset_path='../bin/detector.tflite')
+        base_options = python.BaseOptions(model_asset_path='../dataAcquisitionService/dataAcquisition/service/bin/detector.tflite')
         options = vision.FaceDetectorOptions(base_options=base_options)
         detector = vision.FaceDetector.create_from_options(options)
         return detector
