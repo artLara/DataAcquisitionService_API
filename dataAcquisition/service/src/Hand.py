@@ -75,6 +75,15 @@ class Hand():
         attributes['letter'] = self.__letter 
         attributes['confidense'] = self.__confidense
         return attributes
+    
+    def setAttributes(self, attributes):
+        self.__imgWidth = attributes['imgWidth']
+        self.__imgHeight = attributes['imgHeight']
+        self.__landmarksNormalized = attributes['landmarksNormalized']
+        self.__landmarks = attributes['landmarks']
+        self.__boundingBox = attributes['boundingBox']
+        self.__letter = attributes['letter']
+        self.__confidense = attributes['confidense']
 
     ####### SETTERS
     # def setImg(self,img):

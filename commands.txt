@@ -9,4 +9,5 @@ pip3 install djangorestframework
 pip3 install django-cors-headers
 pip3 install coreapi
 pip3 install opencv-python
-pip3 install pyzmq
+pip3 install pyzmq //Maybe no
+pip3 install mediapipe
