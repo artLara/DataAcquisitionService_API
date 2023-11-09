@@ -65,8 +65,16 @@ class Hand():
             return -1
         return self.__boundingBox[2]-self.__boundingBox[0]
     
-    def getJSON(self):
-        pass
+    def getAttributes(self):
+        attributes = {}
+        attributes['imgWidth']= self.__imgWidth
+        attributes['imgHeight'] = self.__imgHeight
+        attributes['landmarksNormalized'] = self.__landmarksNormalized.tolist()
+        attributes['landmarks'] = self.__landmarks.tolist()
+        attributes['boundingBox'] = self.__boundingBox
+        attributes['letter'] = self.__letter 
+        attributes['confidense'] = self.__confidense
+        return attributes
 
     ####### SETTERS
     # def setImg(self,img):
