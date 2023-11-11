@@ -3,6 +3,7 @@ sys.path.append('../')
 import cv2
 from os import remove
 import numpy as np
+import json
 
 class Hand():
     def __init__(self):
@@ -75,6 +76,17 @@ class Hand():
         attributes['letter'] = self.__letter 
         attributes['confidense'] = self.__confidense
         return attributes
+    
+    def getAttributesJSON(self):
+        attributes = {}
+        attributes['imgWidth']= json.dumps(self.__imgWidth)
+        attributes['imgHeight'] = json.dumps(self.__imgHeight)
+        attributes['landmarksNormalized'] = json.dumps(self.__landmarksNormalized.tolist())
+        attributes['landmarks'] = json.dumps(self.__landmarks.tolist())
+        attributes['boundingBox'] = json.dumps(self.__boundingBox)
+        attributes['letter'] = json.dumps(self.__letter)
+        attributes['confidense'] = json.dumps(self.__confidense)
+        return json.dumps(attributes)
     
     def setAttributes(self, attributes):
         self.__imgWidth = attributes['imgWidth']

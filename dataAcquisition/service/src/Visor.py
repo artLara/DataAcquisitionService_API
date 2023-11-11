@@ -6,6 +6,8 @@ import cv2
 import json
 from datetime import datetime
 import os
+import requests
+
 # import zmq
 
 class Visor():
@@ -41,9 +43,11 @@ class Visor():
             #Problem with frame capturing
             print('It did not possible get a frame from camera')
 
-    # def __sendInformation(self, color, face):
-    #     Data.color = color
-    #     Data.face = face
+    def __sendMessage(self, dataDict):
+        data_json = json.dumps(dataDict)
+        payload = {'json_payload': dataDict}
+        create_headers = {'Content-Type': 'application/json'}
+        r = requests.get('http://localhost:8000/classifier/api/v1/', data=json.dumps(payload))
 
     def __createDictMessages(self, path='dataAcquisition/service/test/messages/'):
         # datetime object containing current date and time
@@ -57,7 +61,7 @@ class Visor():
             json.dump(data, fp)
 
 
-    def start(self, trafficLightColor, face, testMode=False, writeJSON=True,verbose=False):
+    def start(self, trafficLightColor, face, testMode=False, writeJSON=False,verbose=False):
         #Creación de documento que contiene los puntos claves de las manos
         self.__dataDict = {'hands':[]}
         separationFlag = True
@@ -109,7 +113,8 @@ class Visor():
                     #The message is complete
                     if self.__secondsCounter.finished(6) and messageFlag:
                         #Pass file to LSM translation module
-                        #TO DO
+                        self.__sendMessage(self.__dataDict)
+
                         messageCount += 1
                         if writeJSON and handsFlag:
                             self.__writeJsonFile(self.__dataDict, messageCount)
