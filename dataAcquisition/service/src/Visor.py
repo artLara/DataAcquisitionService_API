@@ -61,7 +61,7 @@ class Visor():
             json.dump(data, fp)
 
 
-    def start(self, trafficLightColor, face, testMode=False, writeJSON=False,verbose=False):
+    def start(self, trafficLightColor, face, testMode=False, writeJSON=True,verbose=False):
         #Creación de documento que contiene los puntos claves de las manos
         self.__dataDict = {'hands':[]}
         separationFlag = True
@@ -99,7 +99,7 @@ class Visor():
                         self.__secondsCounter.startCount()
 
                     #Separation between words
-                    if self.__secondsCounter.finished(2) and separationFlag:
+                    if self.__secondsCounter.finished(3) and separationFlag:
                         #Write blank space in file
                         self.__dataDict['hands'].append(None)
                         separationFlag = False
@@ -108,24 +108,31 @@ class Visor():
                         face.value  = 1
 
                         if verbose:
-                            print('Space blank detected. ', trafficLightColor.value)
+                            print('------->Space blank detected. ', trafficLightColor.value)
 
                     #The message is complete
-                    if self.__secondsCounter.finished(6) and messageFlag:
-                        #Pass file to LSM translation module
-                        self.__sendMessage(self.__dataDict)
+                    if self.__secondsCounter.finished(5) and messageFlag:
+                        
 
                         messageCount += 1
                         if writeJSON and handsFlag:
                             self.__writeJsonFile(self.__dataDict, messageCount)
+
+
+                        if verbose:
+                            print('------->Message sent it. ', trafficLightColor.value)
+
+                        #Pass file to LSM translation module
+                        self.__sendMessage(self.__dataDict) 
+
+
                         #Create a new empty file
                         self.__dataDict = {'hands':[]}
                         messageFlag = False
                         # self.__sendInformation('red', 1)
                         trafficLightColor.value = 2 #Red, change to orange
                         face.value  = 1
-                        if verbose:
-                            print('Message sent it. ', trafficLightColor.value)
+                        
 
                         #continue
 
