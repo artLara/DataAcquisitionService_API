@@ -47,7 +47,7 @@ class Visor():
         data_json = json.dumps(dataDict)
         payload = {'json_payload': dataDict}
         create_headers = {'Content-Type': 'application/json'}
-        r = requests.get('http://localhost:8000/classifier/api/v1/', data=json.dumps(payload))
+        r = requests.get('http://localhost:8001/classifier/api/v1/', data=json.dumps(payload))
 
     def __createDictMessages(self, path='dataAcquisition/service/test/messages/'):
         # datetime object containing current date and time
@@ -61,7 +61,7 @@ class Visor():
             json.dump(data, fp)
 
 
-    def start(self, trafficLightColor, face, testMode=False, writeJSON=True,verbose=False):
+    def start(self, trafficLightColor, face, testMode=False, writeJSON=False,verbose=False):
         #Creación de documento que contiene los puntos claves de las manos
         self.__dataDict = {'hands':[]}
         separationFlag = True

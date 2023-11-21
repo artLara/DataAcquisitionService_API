@@ -35,3 +35,4 @@ class Post_APIView(APIView):
         print(tmp)
         
 # subprocess.run(["python3", os.getcwd()+"/dataAcquisition/Server_Data.py"], stdout=subprocess.PIPE)
+# python3 manage.py runserver 8000
